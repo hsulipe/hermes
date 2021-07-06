@@ -5,6 +5,9 @@
   "username": "postgres",
   "password": "password",
   "database": "hermes",
+  "entities": [
+    "./src/modules/**/typeorm/entities/*.ts"
+  ],
   "migrations": [
     "./src/shared/typeorm/migrations/*.ts"
   ],

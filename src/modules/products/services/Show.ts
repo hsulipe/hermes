@@ -1,7 +1,7 @@
 import Product from '../typerorm/entities/Product';
-import AppError from '../../../shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import { ProductRepository } from '../typerorm/repositories/ProductRepository';
+import NotFoundError from '../../../shared/errors/NotFoundError';
 
 interface IShowProductRequest {
     id: string,
@@ -14,7 +14,7 @@ class ShowService {
     const product = await productRepository.findOne(id);
 
     if (!product) {
-      throw new AppError('Product not found.', 404);
+      throw new NotFoundError('Product not found.');
     }
 
     return product;

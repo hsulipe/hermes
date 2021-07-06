@@ -37,7 +37,8 @@ export default class ProductController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, name, price, quantity } = req.body;
+    const { id } = req.params;
+    const { name, price, quantity } = req.body;
 
     const updateProduct = new UpdateService();
     const product = await updateProduct.execute({
