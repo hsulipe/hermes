@@ -20,7 +20,7 @@ class CreateService {
     const userRepository = getCustomRepository(UserRepository);
     const emailExists = await userRepository.findByEmail(email);
 
-    if (emailExists) {
+    if (!emailExists) {
       throw new AppError('User already exists', 500);
     }
 
