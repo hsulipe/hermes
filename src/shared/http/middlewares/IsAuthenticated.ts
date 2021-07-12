@@ -1,7 +1,14 @@
-import { Request, Response, NextFunction } from 'express';
-import AppError from '../../../shared/errors/AppError';
+import { Request, Response, NextFunction, request } from 'express';
+import AppError from '../../errors/AppError';
 import { verify } from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
+
+interface ITokenPayload {
+  iap: number;
+  exp: number;
+  sub: string;
+}
+
 export default function isAuthenticated(
   req : Request,
   res : Response,
@@ -17,6 +24,12 @@ export default function isAuthenticated(
 
     try{
       const decodeToken = verify(token, authConfig.jwt.secret);
+      const { sub } = decodeToken as ITokenPayload;
+
+      request.user = {
+        id: sub,
+      }
+
       return next();
     }
     catch (err) {
