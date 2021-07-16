@@ -6,7 +6,7 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 
-@Entity('users')
+@Entity(`hermes-users-${process.env.ENVIRONMENT_NAME}`)
 export default class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;

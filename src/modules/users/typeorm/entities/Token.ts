@@ -7,7 +7,7 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 
-@Entity('tokens')
+@Entity(`hermes-users-tokens-${process.env.ENVIRONMENT_NAME}`)
 export default class Token {
   @PrimaryGeneratedColumn('uuid')
   id: string;
