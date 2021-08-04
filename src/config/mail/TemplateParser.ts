@@ -1,4 +1,5 @@
 import handlebars  from "handlebars";
+import fs from 'fs';
 
 interface ITemplateVariable {
   [key: string]: string | number;
@@ -14,6 +15,11 @@ export default class TemplateParser {
     template,
     variables
   }: IParseMailTemplate) : Promise<string> {
+    const templateFileContent = await fs.promises
+      .readFile(template, {
+        encoding: 'utf8'
+      });
+
     const parseTemplate = handlebars.compile(template);
     return parseTemplate(variables);
   }
